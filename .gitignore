@@ -78,7 +78,6 @@ web_modules/
 .env.test.local
 .env.production.local
 .env.local
-*.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -91,7 +90,6 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
-dist-ssr
 
 # Gatsby files
 .cache/
@@ -130,14 +128,3 @@ dist-ssr
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
