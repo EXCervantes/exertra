@@ -3,7 +3,7 @@ const { Schema } = require('mongoose');
 const workoutSchema = new Schema(
     {
         distance: {
-            type: Float,
+            type: String,
             require: true,
         },
         totalTime: {
