@@ -17,7 +17,7 @@ const Map = () => {
             
         return position === null? null : (
           <CustomMarker position={position}>
-            <Popup>You clicked here</Popup>
+            <Popup>You are here!</Popup>
           </CustomMarker>
         );
       }

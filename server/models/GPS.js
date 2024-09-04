@@ -11,4 +11,7 @@ const gpsSchema = new Schema(
     }
 )
 
-module.exports = gpsSchema
+const GPS = mongoose.model('GPS', gpsSchema);
+
+
+module.exports = GPS

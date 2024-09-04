@@ -1,6 +1,6 @@
-const { schema } = require('mongoose')
+const { Schema } = require('mongoose')
 
-const dataEntryschema = new Schema(
+const dataLogSchema = new Schema(
     {
         time: {
             type: String,
@@ -17,4 +17,7 @@ const dataEntryschema = new Schema(
     }
 )
 
-module.exports = dataEntryschema
+const Logs = mongoose.model('Logs', dataLogSchema);
+
+
+module.exports = Logs
