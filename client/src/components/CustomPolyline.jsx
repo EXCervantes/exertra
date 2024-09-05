@@ -11,16 +11,16 @@ import { customMarkerUserPos } from "./CustomMarker";
 
 const CustomPolyline = () => {
   const mapRef = useRef();
-  const [center, setCenter] = useState({ lat: 36.460353, lng: 126.440674 });
+  const [center, setCenter] = useState({ lat: 39.173684, lng: -94.788134 });
   const [map, setMap] = useState(null);
 
   const pos = [
-    [36.460353, 126.440674],
-    [34.789594, 135.438084], //to jpn
-    [36.460353, 126.440674],
-    [55.410343, 37.902312], //to rus
-    [36.460353, 126.440674],
-    [40.085148, 116.552407] //to chi
+    [39.173686, -94.788126], // Trailhead start
+    [39.173758, -94.788016], 
+    [39.173834, -94.787955],
+    [39.173894, -94.787889], 
+    [39.173932, -94.787749],
+    [39.173929, -94.787638] // Run end
   ];
 
   return (

@@ -12,6 +12,7 @@ import {
   HiUsers,
 } from "react-icons/hi";
 
+// TODO Fix Flowbite to work with React components
 const LeftNav = () => {
     const [isOpen, setIsOpen] = useState(true);
 

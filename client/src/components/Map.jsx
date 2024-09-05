@@ -7,7 +7,7 @@ const Map = () => {
         const [position, setPosition] = useState(null);
 
         const map = useMap()
-        map.se
+        
         useEffect(() => {
           navigator.geolocation.watchPosition(
             (pos) => {

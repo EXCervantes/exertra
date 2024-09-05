@@ -3,5 +3,3 @@ const points = [
 ]
 
 let counter = 0;
-
-function 
