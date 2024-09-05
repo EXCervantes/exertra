@@ -7,13 +7,30 @@ const Map = () => {
         const [position, setPosition] = useState(null);
 
         const map = useMap()
-        
+        map.se
         useEffect(() => {
+          navigator.geolocation.watchPosition(
+            (pos) => {
+              pos.coords
+            },
+            (err)=>{
+              if (err.code === err.PERMISSION_DENIED) {
+                
+              }
+              else if (err.code === err.POSITION_UNAVAILABLE) {
+
+              }
+              else if (err.code === err.TIMEOUT) {
+
+              }
+            },
+            {}
+          );
           map.locate().on('locationfound', (e) => {
             setPosition(e.latlng)
             map.flyTo(e.latlng, map.getZoom());
           }) 
-          }, [])
+        }, [])
             
         return position === null? null : (
           <CustomMarker position={position}>
@@ -24,7 +41,10 @@ const Map = () => {
     return (
         <div>
             <MapContainer center={[48.856614, 2.3522219]} zoom={13} scrollWheelZoom={false}>
-                <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <TileLayer
+
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <LocationMarker/>
             </MapContainer>
         </div>
