@@ -35,10 +35,10 @@ navigator.geolocation.clearWatch = () => {
     clearInterval(intervalId)
 }
 
-const [currentPosition, setCurrentPosition] = useState()
-const [latitudeOffset, setLatitudeOffset] = useState()
-const [longitudeOffset, setLongitudeOffset] = useState()
+// const [currentPosition, setCurrentPosition] = useState()
+// const [latitudeOffset, setLatitudeOffset] = useState()
+// const [longitudeOffset, setLongitudeOffset] = useState()
 
-onkeydown(e.onkeydown => {
-    e.key(currentPosition d, y)
-})
+// onkeydown(e.onkeydown => {
+//     e.key(currentPosition d, y)
+// })

@@ -13,15 +13,19 @@ const Map = () => {
   const [watchId, setWatchId] = useState(null);
 
 
-
   useEffect(() => {
     // Get user's current location on page load
-    navigator.geolocation.getCurrentPosition((position) => {
-      setMapCenter([position.coords.latitude, position.coords.longitude])
-    });
-    setTimeout(() => {
-      setReadyRender(true)
-    }, 1000)
+    if (!navigator.geolocation) {
+      logConsole.textContent = 'Geolocation is not supported by your browser';
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setReadyRender(true)
+        setMapCenter([position.coords.latitude, position.coords.longitude])
+      })
+    }
+    // setTimeout(() => {
+    //   setReadyRender(true)
+    // }, 1000)
   }, []);
 
 
@@ -29,14 +33,17 @@ const Map = () => {
     if (!isTracking) {
       setIsTracking(true);
       setWatchId(navigator.geolocation.watchPosition((position) => {
-        setWalkingRoute((prevRoute) => [...prevRoute, [position.coords.latitude, position.coords.longitude]]);
+        setWalkingRoute((prevRoute) => [...prevRoute, {
+          coords: position.coords,
+          time: new Date()
+        }]);
         setMapCenter([position.coords.latitude, position.coords.longitude])
       }, (error) => {
         console.error(error);
       }, {
         enableHighAccuracy: true,
-        maximumAge: 1000,
-        timeout: 5000,
+        maximumAge: 30000,
+        timeout: 2000,
       }));
     } else {
       navigator.geolocation.clearWatch(watchId);
@@ -62,7 +69,7 @@ const Map = () => {
                   url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
                   maxZoom={19}
                   />
-                <Polyline positions={walkingRoute} pathOptions={{color: 'teal'}}/>
+                <Polyline positions={walkingRoute.map(pos => [pos.coords.latitude, pos.coords.longitude])} pathOptions={{color: 'teal'}}/>
                 <CustomMarker position={mapCenter}/>
             </MapContainer>}
 
