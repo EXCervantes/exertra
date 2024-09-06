@@ -1,18 +1,32 @@
 const { Schema, model } = require('mongoose');
+const DataEntry = require('./DataEntry')
 
 const workoutSchema = new Schema(
     {
         distance: {
             type: String,
-            require: true,
+            required: true,
         },
         totalTime: {
             type: String,
         },
+        averagePace: {
+            type: Number,
+            required: true,
+        },
         workoutType: {
             type: String,
-            require: true,
-        }
+            required: true,
+        },
+        splits: [{
+            startCoord: ,
+            stopCoord,
+            distance,
+            time,
+            pace,
+        },
+        ],
+        dataEntries: [DataEntry.schema]
     }
 )
 

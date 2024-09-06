@@ -1,23 +1,28 @@
-const { Schema } = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const dataLogSchema = new Schema(
+const dataEntrySchema = new Schema(
     {
         time: {
             type: String,
             required: true,
         },
-        positionX: {
-            type: String,
-            required: true,
-        },
-        positionY: {
-            type: String,
+        coords: {
+            type: {
+                latitude: {
+                    type: String,
+                    required: true,
+                },
+                longitude: {
+                    type: String,
+                    required: true,
+                }
+            },
             required: true,
         }
     }
 )
 
-const Logs = mongoose.model('Logs', dataLogSchema);
+const Logs = model('DataEntry', dataEntrySchema);
 
 
 module.exports = Logs

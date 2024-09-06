@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const gpsSchema = new Schema(
     {
@@ -11,7 +11,7 @@ const gpsSchema = new Schema(
     }
 )
 
-const GPS = mongoose.model('GPS', gpsSchema);
+const GPS = model('GPS', gpsSchema);
 
 
 module.exports = GPS
