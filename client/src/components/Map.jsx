@@ -63,7 +63,13 @@ const Map = () => {
     return (
         <div>
           {/* TODO Fix this */}
-          {readyRender && <MapContainer center={mapCenter} zoom={zoom} scrollWheelZoom={false}>
+          <div className='flex justify-center md: place-content-center'>
+          {readyRender && 
+            <MapContainer
+              style={{height: "100vh", width: "90%"}}
+              center={mapCenter}
+              zoom={zoom}
+              scrollWheelZoom={false}>
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' 
                   url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -72,8 +78,8 @@ const Map = () => {
                 <Polyline positions={walkingRoute.map(pos => [pos.coords.latitude, pos.coords.longitude])} pathOptions={{color: 'teal'}}/>
                 <CustomMarker position={mapCenter}/>
             </MapContainer>}
-
-            <div className='flex flex-row items-center gap-3'>
+          </div>
+            <div className='fixed bottom-2 flex justify-center md: place-content-center gap-3'>
             <Button gradientMonochrome={'success'} onClick={handleStartTracking}>
               {isTracking? 'Pause' : 'Start'}
             </Button>
