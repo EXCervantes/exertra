@@ -18,14 +18,15 @@ const workoutSchema = new Schema(
             type: String,
             required: true,
         },
-        splits: [{
-            startCoord: ,
-            stopCoord,
-            distance,
-            time,
-            pace,
-        },
-        ],
+        // splits: [
+        //     {
+        //         startCoord: ,
+        //         stopCoord,
+        //         distance,
+        //         time,
+        //         pace,
+        //     },
+        // ],
         dataEntries: [DataEntry.schema]
     }
 )

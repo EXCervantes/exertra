@@ -1,3 +1,4 @@
+// Reference data, might delete later
 const { Schema, model } = require('mongoose');
 
 const gpsSchema = new Schema(
