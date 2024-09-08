@@ -28,3 +28,16 @@ export const ADD_USER = gql`
 `;
 
 // Handle adding log data
+export const ADD_WORKOUT = gql`
+    mutation addWorkout($workoutData) {
+        addWorkout(workoutData: workoutData$) {
+            _id
+            username
+            email
+            addWorkout {
+                workoutId
+                
+            }
+        }
+    }
+`
