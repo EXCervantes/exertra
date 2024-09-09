@@ -75,7 +75,11 @@ const Map = () => {
                   url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
                   maxZoom={19}
                   />
-                <Polyline positions={walkingRoute.map(pos => [pos.coords.latitude, pos.coords.longitude])} pathOptions={{color: 'teal'}}/>
+                <Polyline 
+                  positions={walkingRoute.map(pos => [pos.coords.latitude, pos.coords.longitude])}
+                  pathOptions={{color: 'teal'}}
+                  
+                  />
                 <CustomMarker position={mapCenter}/>
             </MapContainer>}
           </div>
