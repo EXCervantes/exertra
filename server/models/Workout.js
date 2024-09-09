@@ -4,20 +4,22 @@ const DataEntry = require('./DataEntry')
 const workoutSchema = new Schema(
     {
         distance: {
-            type: String,
-            required: true,
-        },
-        totalTime: {
-            type: String,
-        },
-        averagePace: {
             type: Number,
             required: true,
         },
-        workoutType: {
-            type: String,
+        totalTime: {
+            type: Number,
             required: true,
+            // get: (timestamp) => timeFormat(timestamp)
         },
+        // averagePace: {
+        //     type: Number,
+        //     required: true,
+        // },
+        // workoutType: {
+        //     type: String,
+        //     required: true,
+        // },
         // splits: [
         //     {
         //         startCoord: ,

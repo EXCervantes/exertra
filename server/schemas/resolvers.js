@@ -5,7 +5,7 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 // Define the typeDefs parameters and handle requested relevant data
 const resolvers = {
     Query: {
-        me: async (parent, args, context) => {
+        users: async (parent, args, context) => {
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                     .select('-__v -password')

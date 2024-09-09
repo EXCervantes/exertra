@@ -30,7 +30,7 @@ type Auth {
 }
 
 type Query {
-  user: User
+  users: [User]
   workouts(_id: ID!): [Workout]
   # getSplits(workoutId: ID!): [Split]!
 }

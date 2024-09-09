@@ -1,5 +1,6 @@
-// Start coords at 39.173659, -94.788111
+// For development purposes and testing
 
+// Start coords at 39.173659, -94.788111
 const points = [
     [39.173684, -94.788134], // Trailhead start
     [39.173696, -94.788107],
