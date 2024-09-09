@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Workout } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 // const stripe = require('stripe')(apitestkey)
 
@@ -39,6 +39,15 @@ const resolvers = {
 
             return { token, user };
         },
+        addWorkout: async (parent, { workouts }, context) => {
+            if (context.use) {
+                const newWorkout = new Workout({ workouts });
+
+                await User.findByIdAndUpdate(context.user.id, {
+                    $push: { workout: workouts }
+                })
+            }
+        }
     },
 };
 
