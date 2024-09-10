@@ -42,7 +42,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <>
         <BrowserRouter>
-          <main>
+          <main className="overflow-x-hidden tracking-tighter antialiased">
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />

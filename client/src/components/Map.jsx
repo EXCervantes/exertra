@@ -8,8 +8,8 @@ import {
 } from "react-leaflet";
 import CustomMarker from "./custom-marker";
 import { Button } from "flowbite-react";
-import { useNavigate } from "react-router-dom";
-import tracker from "../lib/tracker";
+import moment from "moment";
+// import tracker from "../lib/tracker"; Custom hook for later
 
 const Map = () => {
   const [readyRender, setReadyRender] = useState(false);
@@ -20,13 +20,6 @@ const Map = () => {
   const [watchId, setWatchId] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const onBack = (e) => {
-    e.preventDefault();
-    navigate(-1);
-  };
 
   useEffect(() => {
     // Get user's current location on page load

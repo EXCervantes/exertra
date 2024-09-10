@@ -1,4 +1,4 @@
-const tracker = () => {
+export const tracker = () => {
     const HIGH_ACCURACY = true;
     const MAX_CACHE_AGE_MILLISECOND = 30000;
     const MAX_NEW_POSITION_MILLISECOND = 2000;
@@ -18,5 +18,3 @@ const tracker = () => {
         return navigator.geolocation.watchPosition(success, error, trackOptions);
     }
 };
-
-export default tracker
