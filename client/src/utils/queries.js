@@ -2,14 +2,14 @@
 import { gql } from '@apollo/client';
 
 // Define user query
-const GET_USER = gql`
+export const GET_USER = gql`
   query getUser($id: ID!) {
     getUser(id: $id) {
-      id
+      _id
       name
       email
-      routes {
-        id
+      workout {
+        _id
         distance
         time
         # splits {
@@ -24,9 +24,9 @@ const GET_USER = gql`
   }
 `;
 
-const GET_WORKOUT = gql`
+export const GET_WORKOUT = gql`
   query getWorkout($id: ID!) {
-    getRoute(id: $id) {
+    getWorkout(id: $id) {
       id
       userId
       distance
@@ -54,7 +54,7 @@ const GET_WORKOUT = gql`
 //   }
 // `;
 
-const CREATE_WORKOUT = gql`
+export const CREATE_WORKOUT = gql`
   mutation CreateRoute($userId: ID!, $distance: Float!, $time: Float!, $polyline: String!) {
     createRoute(userId: $userId, distance: $distance, time: $time, polyline: $polyline) {
       id
@@ -66,7 +66,7 @@ const CREATE_WORKOUT = gql`
   }
 `;
 
-const CREATE_SPLIT = gql`
+export const CREATE_SPLIT = gql`
   mutation CreateSplit($routeId: ID!, $distance: Float!, $time: Float!, $pace: Float!, $timePerMeter: Float!) {
     createSplit(routeId: $routeId, distance: $distance, time: $time, pace: $pace, timePerMeter: $timePerMeter) {
       id
@@ -75,6 +75,21 @@ const CREATE_SPLIT = gql`
       time
       pace
       timePerMeter
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+  query me {
+    me {
+      _id
+      username
+      email
+      workout {
+        id
+        distance
+        time
+      }
     }
   }
 `;

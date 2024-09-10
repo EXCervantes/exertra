@@ -5,11 +5,15 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { Outlet } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// import LeftNav from "./components/LeftNav"
-import Navbar from "./components/Navbar";
-import Map from "./components/Map";
+// import Navbar from "./components/Navbar";
+// import Map from "./components/Map";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import Home from "./pages/Home.jsx";
+import Error from "./pages/Error.jsx";
 
 // Main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -37,12 +41,23 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <>
-        <main>
-          <Navbar />
-          <Outlet />
-          <Map />
-          {/* <LeftNav/> */}
-        </main>
+        <BrowserRouter>
+          <main>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
+              <Route element={<Error />}></Route>
+            </Routes>
+          </main>
+        </BrowserRouter>
       </>
     </ApolloProvider>
   );

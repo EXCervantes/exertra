@@ -1,28 +1,26 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
-import {HiMail, HiKey} from 'react-icons/hi'
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutations";
+import { Button, Label, TextInput } from "flowbite-react";
+import { HiMail, HiKey } from "react-icons/hi";
 
+import Auth from "../utils/auth";
 
-import Auth from '../utils/auth';
+const Login = (props) => {
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { error, data }] = useMutation(LOGIN_USER);
 
-const LoginForm = (props) => {
-    const [formState, setFormState] = useState({email: '', password: ''})
-    const [login, {error, data}] = useMutation(LOGIN_USER)
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
 
-    const handleFormChange = (e) => {
-        const {name, value} = e.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
-        setFormState({
-            ...formState,
-            [name]: value
-        });
-    }
-
-  // submit form
-   const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     console.log(formState);
     try {
@@ -35,71 +33,71 @@ const LoginForm = (props) => {
       console.error(e);
     }
 
-    // clear form values
     setFormState({
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     });
   };
-  
+
   return (
+    <div>
       <div>
+        <h3 className="text-xl" id="login">
+          Login
+        </h3>
         <div>
-        <h3 className="text-xl" id="login">Login</h3>
-        <div>
-            {data ? (
-                <p>
-                    Successfully logged in! {' '}
-                    <Link to="/">back to the main page.</Link>
-                </p>
-            ) : (
-    <form className="flex max-w-md flex-col gap-4">
-    <div>
-      <div className="mb-2 block">
-        <Label 
-        htmlFor="email1"
-        value="Your email"
-        />
+          {data ? (
+            <p>
+              Successfully logged in! <Link to="/">back to the main page.</Link>
+            </p>
+          ) : (
+            <form
+              className="flex max-w-md flex-col gap-4"
+              onSubmit={handleFormSubmit}
+            >
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="email" value="Your email" />
+                </div>
+                <TextInput
+                  id="email"
+                  type="email"
+                  name="email"
+                  onChange={handleFormChange}
+                  rightIcon={HiMail}
+                  placeholder="email@example.com"
+                  required
+                  shadow
+                />
+              </div>
+              <div>
+                <div className="mb-2 block">
+                  <Label htmlFor="password" value="Your password" />
+                </div>
+                <TextInput
+                  id="password"
+                  type="password"
+                  name="password"
+                  onChange={handleFormChange}
+                  rightIcon={HiKey}
+                  required
+                  shadow
+                />
+              </div>
+              {/* <div className="flex items-center gap-2">
+                <Checkbox id="remember" />
+                <Label htmlFor="remember">Remember me</Label>
+              </div> */}
+              <Button type="submit">Submit</Button>
+            </form>
+          )}
+          {error && (
+            <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
+          )}
+        </div>
       </div>
-      <TextInput
-      id="email1"
-      type="email"
-      rightIcon={HiMail}
-      placeholder="name@flowbite.com"
-      required
-      />
     </div>
-    <div>
-      <div className="mb-2 block">
-        <Label
-        htmlFor="password1"
-        value="Your password"
-        />
-      </div>
-      <TextInput
-      id="password1"
-      type="password"
-      rightIcon={HiKey}
-      required
-      />
-    </div>
-    <div className="flex items-center gap-2">
-      <Checkbox id="remember" />
-      <Label htmlFor="remember">Remember me</Label>
-    </div>
-    <Button type="submit">Submit</Button>
-  </form>
-        )}
-        {error && (
-            <div className="my-3 p-3 bg-danger text-white">
-                {error.message}
-            </div>
-        )}
+  );
+};
 
-      </div>
-      </div>
-      </div>
-  )
-}
-
-export default LoginForm;
+export default Login;

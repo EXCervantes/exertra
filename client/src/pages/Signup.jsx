@@ -2,12 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-import { Button, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Label, TextInput } from "flowbite-react";
 import { HiUser, HiMail, HiKey } from "react-icons/hi";
 
 import Auth from "../utils/auth";
 
-const SignupForm = () => {
+const Signup = () => {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -17,7 +17,7 @@ const SignupForm = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
+    console.log("setFormState", event);
     setFormState({
       ...formState,
       [name]: value,
@@ -32,7 +32,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...formState },
       });
-
+      console.log(data);
       Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
@@ -43,8 +43,8 @@ const SignupForm = () => {
     <div className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div>
-          <h3 className="text-xl" id="login">
-            Login
+          <h3 className="text-2xl" id="login">
+            Signup
           </h3>
           <div>
             {data ? (
@@ -58,74 +58,64 @@ const SignupForm = () => {
               >
                 <div>
                   <div className="mb-2 block">
-                    <Label htmlFor="username" value="Your username" />
+                    <Label htmlFor="username" value="Your Username" />
                   </div>
                   <TextInput
                     id="username"
-                    type="name"
-                    rightIcon={HiUser}
-                    placeholder="UnassumingMan"
-                    value={formState.username}
+                    type="text"
+                    name="username"
                     onChange={handleChange}
+                    rightIcon={HiUser}
+                    placeholder="Your username"
                     required
                     shadow
                   />
                 </div>
                 <div>
                   <div className="mb-2 block">
-                    <Label htmlFor="email2" value="Your email" />
+                    <Label htmlFor="email" value="Your Email" />
                   </div>
                   <TextInput
-                    id="email2"
+                    id="email"
                     type="email"
+                    name="email"
+                    onChange={handleChange}
                     rightIcon={HiMail}
                     placeholder="email@example.com"
-                    value={formState.email}
-                    onChange={handleChange}
                     required
                     shadow
                   />
                 </div>
                 <div>
                   <div className="mb-2 block">
-                    <Label htmlFor="password2" value="Your password" />
+                    <Label htmlFor="password" value="Your Password" />
                   </div>
                   <TextInput
-                    id="password2"
+                    id="password"
                     type="password"
-                    rightIcon={HiKey}
-                    value={formState.password}
+                    name="password"
                     onChange={handleChange}
+                    rightIcon={HiKey}
                     required
                     shadow
                   />
                 </div>
-                <div>
+                {/* <div>
                   <div className="mb-2 block">
-                    <Label htmlFor="repeat-password" value="Repeat password" />
+                    <Label
+                      htmlFor="repeat-password"
+                      value={formState.password}
+                    />
                   </div>
                   <TextInput
                     id="repeat-password"
                     type="password"
-                    rightIcon={HiKey}
-                    value={formState.password}
                     onChange={handleChange}
+                    rightIcon={HiKey}
                     required
                     shadow
                   />
-                </div>
-                <div className="flex items-center gap-2">
-                  <Checkbox id="agree" />
-                  <Label htmlFor="agree" className="flex">
-                    I agree with the&nbsp;
-                    <Link
-                      href="#"
-                      className="text-cyan-600 hover:underline dark:text-cyan-500"
-                    >
-                      terms and conditions
-                    </Link>
-                  </Label>
-                </div>
+                </div> */}
                 <Button type="submit">Register new account</Button>
               </form>
             )}
@@ -142,7 +132,7 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default Signup;
 
 {
   /* <div class="flex flex-col justify-center items-center">
