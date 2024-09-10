@@ -1,12 +1,9 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import RunStick from "../assets/mapMarker2.svg";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 
-// Make running man not transperent
 const CustomMarker = ({ position, children }) => {
-  const map = useMap();
-
   const customIcon = L.icon({
     iconUrl: RunStick,
     iconSize: [40, 40],
