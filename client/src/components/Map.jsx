@@ -8,6 +8,7 @@ import {
 } from "react-leaflet";
 import CustomMarker from "./custom-marker";
 import { Button } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 import tracker from "../lib/tracker";
 
 const Map = () => {
@@ -17,16 +18,32 @@ const Map = () => {
   const [walkingRoute, setWalkingRoute] = useState([]);
   const [isTracking, setIsTracking] = useState(false);
   const [watchId, setWatchId] = useState(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const onBack = (e) => {
+    e.preventDefault();
+    navigate(-1);
+  };
 
   useEffect(() => {
     // Get user's current location on page load
     if (!navigator.geolocation) {
-      logConsole.textContent = "Geolocation is not supported by your browser";
+      return setError("Geolocation not supported on this device.");
     } else {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setReadyRender(true);
-        setMapCenter([position.coords.latitude, position.coords.longitude]);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setIsLoading(false);
+          setReadyRender(true);
+          setMapCenter([position.coords.latitude, position.coords.longitude]);
+        },
+        (error) => {
+          setIsLoading(false);
+          setError(error.message);
+        }
+      );
     }
   }, []);
 
@@ -46,6 +63,7 @@ const Map = () => {
             setMapCenter([position.coords.latitude, position.coords.longitude]);
           },
           (error) => {
+            setError(error.message);
             console.error(error);
           },
           {

@@ -54,7 +54,7 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route element={<Error />}></Route>
+              <Route path="*" element={<Error />}></Route>
             </Routes>
           </main>
         </BrowserRouter>
