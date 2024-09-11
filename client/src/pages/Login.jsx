@@ -22,6 +22,7 @@ const Login = (props) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    // Delete this console log
     console.log(formState);
     try {
       const { data } = await login({
@@ -94,9 +95,11 @@ const Login = (props) => {
               <Button type="submit">Submit</Button>
             </form>
           )}
-          {error && (
-            <div className="my-3 p-3 bg-danger text-white">{error.message}</div>
-          )}
+          {error ? (
+            <div className="my-3 p-3 text-black">
+              Email or password incorrect. Please check your login details.
+            </div>
+          ) : null}
         </div>
       </div>
     </div>
