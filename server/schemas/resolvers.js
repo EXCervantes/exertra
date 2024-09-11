@@ -1,23 +1,33 @@
 const { User, Workout } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 // const stripe = require('stripe')(apitestkey)
-
+console.log("resolverhasloaded")
 // Define the typeDefs parameters and handle requested relevant data
 const resolvers = {
     Query: {
-        users: async (parent, args, context) => {
-            if (context.user) {
-                const userData = await User.findOne({ _id: context.user._id })
-                    .select('-__v -password')
+        // users: async (parent, args, context) => {
+        //     console.log("i am here")
+        //     if (context.user) {
+        //         const userData = await User.findOne({ _id: context.user._id })
+        //             .populate('workouts')
 
-                return userData
+        //         return userData
+        //     }
+        //     throw new AuthenticationError('You need to be logged in!');
+        // },
+        me: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id })
+                    .populate('workouts')
+                    .select('-__v -password')
             }
-            throw new AuthenticationError('You need to be logged in!');
+            throw AuthenticationError;
         },
     },
 
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
+            console.log("addUser")
             const user = await User.create({ username, email, password });
             console.log("user", user)
             const token = signToken(user);
@@ -25,6 +35,7 @@ const resolvers = {
             return { token, user };
         },
         login: async (parent, { email, password }) => {
+            console.log("login")
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -41,15 +52,24 @@ const resolvers = {
 
             return { token, user };
         },
-        addWorkout: async (parent, { workouts }, context) => {
+        addWorkout: async (parent, { distance, time }, context) => {
+            console.log({ distance, time })
+            console.log({ context })
             if (context.user) {
-                const updatedUser = await User.findByIdAndUpdate(
-                    { _id: context.user._id },
-                    { $addToSet: { workout: workouts } },
-                    { new: true }
-                )
-
-                return updatedUser
+                console.log("context.user._id", context.user._id)
+                console.log({ distance, time })
+                const workout = new Workout({ distance, time })
+                console.log(workout)
+                try {
+                    await User.findByIdAndUpdate(
+                        { _id: context.user._id },
+                        { $push: { workouts: workout } },
+                    )
+                } catch (error) {
+                    console.error(error)
+                }
+                console.log("updatedUser")
+                return workout
             }
             throw AuthenticationError('You need to be logged in!');
         }

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Polyline, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import { Button } from "flowbite-react";
 import CustomMarker from "./custom-marker";
 import dayjs from "dayjs";
@@ -14,6 +14,8 @@ const Map = () => {
   const [mapCenter, setMapCenter] = useState([39.192686, -105.333709]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { zoom } = useMapActions();
+
   const {
     isTracking,
     walkingRoute,
@@ -22,8 +24,6 @@ const Map = () => {
     totalTime,
     totalDistance,
   } = geolocationTrackingStats();
-
-  const { zoom } = useMapActions();
 
   useEffect(() => {
     if (!navigator.geolocation) {

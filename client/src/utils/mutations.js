@@ -40,47 +40,16 @@ export const ADD_USER = gql`
 // Handle adding log data
 export const ADD_WORKOUT = gql`
     mutation addWorkout(
-        $userId: ID!,
-        $distance: Float!,
-        $time: Float!,
-        # $polyline: String!
+        $distance: Float!
+        $time: Int
         ) {
         addWorkout(
-            userId: $userId,
-            distance: $distance,
-            time: $time,
-            # polyline: $polyline
+            distance: $distance
+            time: $time
             ) {
-            id
-            userId
             distance
             time
-            # polyline
     }
   }
 `;
 
-// export const CREATE_SPLIT = gql`
-//   mutation createSplit(
-//     $workoutId: ID!,
-//     $distance: Float!,
-//     $time: Float!,
-//     $pace: Float!,
-//     $timePerMeter: Float!
-//     ) {
-//     createSplit(
-//         workoutId: $workoutId,
-//         distance: $distance,
-//         time: $time,
-//         pace: $pace,
-//         timePerMeter: $timePerMeter
-//         ) {
-//         id
-//         workoutId
-//         distance
-//         time
-//         pace
-//         timePerMeter
-//     }
-//   }
-// `;

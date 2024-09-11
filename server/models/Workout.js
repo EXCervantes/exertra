@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const DataEntry = require('./DataEntry')
 
 const workoutSchema = new Schema(
     {
@@ -7,29 +6,10 @@ const workoutSchema = new Schema(
             type: Number,
             required: true,
         },
-        totalTime: {
+        time: {
             type: Number,
             required: true,
-            // get: (timestamp) => timeFormat(timestamp)
         },
-        // averagePace: {
-        //     type: Number,
-        //     required: true,
-        // },
-        // workoutType: {
-        //     type: String,
-        //     required: true,
-        // },
-        // splits: [
-        //     {
-        //         startCoord: ,
-        //         stopCoord,
-        //         distance,
-        //         time,
-        //         pace,
-        //     },
-        // ],
-        dataEntries: [DataEntry.schema]
     }
 )
 

@@ -4,7 +4,7 @@ import { HiInformationCircle, HiLogout } from "react-icons/hi";
 import { FaUser, FaCog, FaGithub } from "react-icons/fa";
 import { BsBoxArrowLeft } from "react-icons/bs";
 
-// TODO Fix Flowbite to work with React components
+// TODO Make Dashboard show past workouts,
 const RightNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
