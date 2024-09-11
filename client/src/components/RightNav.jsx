@@ -1,7 +1,7 @@
 import { Button, Drawer, Sidebar, TextInput } from "flowbite-react";
 import { useState } from "react";
-import { HiChartPie, HiInformationCircle, HiLogout } from "react-icons/hi";
-import { FaUser, FaCog } from "react-icons/fa";
+import { HiInformationCircle, HiLogout } from "react-icons/hi";
+import { FaUser, FaCog, FaGithub } from "react-icons/fa";
 import { BsBoxArrowLeft } from "react-icons/bs";
 
 // TODO Fix Flowbite to work with React components
@@ -23,7 +23,12 @@ const RightNav = () => {
             <BsBoxArrowLeft className="h-5 w-5" />
           </Button>
         </div>
-        <Drawer open={isOpen} onClose={handleClose} position="right">
+        <Drawer
+          backdrop={true}
+          open={isOpen}
+          onClose={handleClose}
+          position="right"
+        >
           <Drawer.Header title="MENU" titleIcon={() => <></>} />
           <Drawer.Items>
             <Sidebar
@@ -34,17 +39,14 @@ const RightNav = () => {
                 <div>
                   <Sidebar.Items>
                     <Sidebar.ItemGroup>
-                      <Sidebar.Item href="/" icon={HiChartPie}>
-                        Dashboard
-                      </Sidebar.Item>
                       <Sidebar.Item href="/users/list" icon={FaUser}>
-                        Users list
+                        Dashboard
                       </Sidebar.Item>
                       <Sidebar.Item
                         href="/authentication/sign-in"
                         icon={HiLogout}
                       >
-                        Sign in
+                        Logout
                       </Sidebar.Item>
                     </Sidebar.ItemGroup>
                     <Sidebar.ItemGroup>
@@ -54,11 +56,18 @@ const RightNav = () => {
                       >
                         Settings
                       </Sidebar.Item>
+
                       <Sidebar.Item
-                        href="https://github.com/themesberg/flowbite-react/issues"
+                        href="https://github.com/EXCervantes/exertra/blob/main/README.md"
                         icon={HiInformationCircle}
                       >
                         Help
+                      </Sidebar.Item>
+                      <Sidebar.Item
+                        href="https://github.com/EXCervantes/exertra/"
+                        icon={FaGithub}
+                      >
+                        Dev Github
                       </Sidebar.Item>
                     </Sidebar.ItemGroup>
                   </Sidebar.Items>
