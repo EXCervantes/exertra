@@ -12,6 +12,7 @@ const CustomMarker = ({ position, children }) => {
 
   return (
     <Marker position={position} icon={customIcon}>
+      <Popup>You are here!</Popup>
       {children}
     </Marker>
   );

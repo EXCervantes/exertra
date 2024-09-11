@@ -14,7 +14,14 @@ module.exports = {
       'md': '768px',
       'lg': '1400px',
     },
-    extend: {},
+    extend: {
+      dropShadow: {
+        glow: [
+          "0 0px 20px rgba(255,255, 255, 0.35)",
+          "0 0px 65px rgba(255, 255,255, 0.2)"
+        ]
+      }
+    }
   },
   plugins: [
     flowbite.plugin(),

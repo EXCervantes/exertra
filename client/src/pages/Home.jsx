@@ -1,7 +1,5 @@
-import { useState, useEffect } from "react";
-import { useQuery } from "@apollo/client";
-import { Navigate, useParams } from "react-router-dom";
 import Map from "../components/Map";
+import RightNav from "../components/RightNav";
 
 const Home = () => {
   return (

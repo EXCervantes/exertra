@@ -31,6 +31,7 @@ const Login = (props) => {
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
+      // TODO User wrong credits
     }
 
     setFormState({
@@ -63,6 +64,7 @@ const Login = (props) => {
                   id="email"
                   type="email"
                   name="email"
+                  value={formState.email}
                   onChange={handleFormChange}
                   rightIcon={HiMail}
                   placeholder="email@example.com"
@@ -78,6 +80,7 @@ const Login = (props) => {
                   id="password"
                   type="password"
                   name="password"
+                  value={formState.password}
                   onChange={handleFormChange}
                   rightIcon={HiKey}
                   required
