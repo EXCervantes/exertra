@@ -1,5 +1,6 @@
-// For development purposes and testing
+// For development purposes and testing app
 
+// Coords to map a test run
 // Start coords at 39.173659, -94.788111
 const points = [
     [39.173684, -94.788134], // Trailhead start
@@ -35,11 +36,3 @@ navigator.geolocation.clearWatch = () => {
     console.log('clearInterval')
     clearInterval(intervalId)
 }
-
-// const [currentPosition, setCurrentPosition] = useState()
-// const [latitudeOffset, setLatitudeOffset] = useState()
-// const [longitudeOffset, setLongitudeOffset] = useState()
-
-// onkeydown(e.onkeydown => {
-//     e.key(currentPosition d, y)
-// })

@@ -1,3 +1,4 @@
+// Delete this
 import L from "leaflet";
 import "leaflet-sidebar-v2";
 // import "https://unpkg.com/leaflet-sidebar-v2@1.0.0/css/leaflet-sidebar.min.css";

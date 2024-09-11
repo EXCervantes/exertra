@@ -8,6 +8,7 @@ dayjs.extend(duration);
 import { useV2Sidebar } from "react-leaflet-v2-sidebar";
 import L from "leaflet";
 import RightNav from "./RightNav";
+import Stopwatch from "./Stopwatch";
 // import metersToMiles from "../utils/distances";
 // import tracker from "../lib/tracker"; Custom hook for later
 
@@ -201,6 +202,7 @@ const Map = () => {
                 </Button>
                 <div className="bg-blue-100 border-solid border-gray-400">
                   <div className="drop-shadow-glow">
+                    <Stopwatch />
                     <p>Total Distance: {totalDistance.toFixed(2)} miles</p>
                     <br></br>
                     <p>

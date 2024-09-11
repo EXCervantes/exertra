@@ -1,3 +1,4 @@
+// Use Protected Routes from React to keep app main elements from user unless they login
 import { Navigate, useLocation } from "react-router-dom";
 import Auth from "../utils/auth";
 
