@@ -7,8 +7,6 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-// import Navbar from "./components/Navbar";
-// import Map from "./components/Map";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
@@ -46,7 +44,9 @@ const App = () => {
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route
+              <Routh
+                path="/dashboard"
+                element={<Dashboard />}
                 path="/"
                 element={
                   <ProtectedRoute>

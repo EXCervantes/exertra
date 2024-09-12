@@ -9,7 +9,7 @@ type User {
 type Workout {
   _id: ID
   distance: Float!
-  time: Int!
+  time: Float!
 }
 
 
@@ -27,7 +27,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String!, password: String!): Auth
-  addWorkout(distance: Float!, time: Int): User
+  addWorkout(distance: Float!, time: Float!): User
 }
 
 `;

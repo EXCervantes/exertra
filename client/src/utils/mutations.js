@@ -39,16 +39,9 @@ export const ADD_USER = gql`
 
 // Handle adding log data
 export const ADD_WORKOUT = gql`
-    mutation addWorkout(
-        $distance: Float!
-        $time: Int
-        ) {
-        addWorkout(
-            distance: $distance
-            time: $time
-            ) {
-            distance
-            time
+  mutation addWorkout($distance: Float!, $time: Float!) {
+    addWorkout(distance: $distance, time: $time) {
+      _id
     }
   }
 `;

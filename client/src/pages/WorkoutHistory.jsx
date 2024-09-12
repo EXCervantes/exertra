@@ -7,20 +7,24 @@ const Workouts = () => {
     variables: { userId },
   });
 
+  if (!workouts.length) {
+    return <h3>No Workouts Yet</h3>;
+  }
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="p-4">
-      <h2 className="text-3xl mb-4">Your Workouts</h2>
+      <h2 className="text-3xl mb-4">Past Workouts</h2>
       <div className="space-y-4">
-        {data.getWorkouts.map((activity) => (
+        {data.getWorkouts.map((workout) => (
           <div
-            key={activity.id}
+            key={workout.id}
             className="p-4 bg-gray-700 text-white rounded-lg shadow-lg"
           >
-            <h3 className="text-xl">{activity.type.toUpperCase()}</h3>
-            <p>Distance: {activity.distance} km</p>
+            <h3 className="text-xl">Workout</h3>
+            <p>Distance: {activity.distance} miles</p>
             <p>Duration: {activity.duration} minutes</p>
           </div>
         ))}
