@@ -78,13 +78,14 @@ const RightNav = () => {
                       <Sidebar.Item href="/dashboard" icon={FaUser}>
                         Dashboard
                       </Sidebar.Item>
-                      <Sidebar.Item
+                      {/* <Sidebar.Item
                         className="cursor-pointer"
                         href="/"
                         icon={FaCog}
+                        disabled
                       >
                         Settings
-                      </Sidebar.Item>
+                      </Sidebar.Item> */}
                       <Sidebar.Item
                         className="cursor-pointer"
                         onClick={logout}

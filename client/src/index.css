@@ -18,7 +18,7 @@
   position: absolute;
   z-index: 1200;
   bottom: 4em;
-  left: 40%;
+  right: 30%;
 }
 
 #right-nav {
@@ -33,9 +33,3 @@
   border-bottom-right-radius: 50px 20%;
   border-bottom-left-radius: 50px 20%;
 }
-
-/* #4CAF50
-
-#B2DFDB
-
-#F0F0F0 */

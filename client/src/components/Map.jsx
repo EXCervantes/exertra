@@ -225,13 +225,12 @@ const Map = () => {
               <CustomMarker position={mapCenter} />
               <RightNav />
               <div
-                className="flex justify-center items-center mt-10"
+                className="flex justify-center items-center mr-12 mt-10"
                 id="button-wrapper"
               >
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                   <div
-                    className="max-w-xl mx-auto bg-slate-50
-         overflow-hidden shadow-lg"
+                    className="max-w-xl mx-auto bg-slate-50 overflow-hidden shadow-lg"
                     id="custom-container"
                   >
                     <div className="px-6 py-4">
