@@ -3,7 +3,7 @@ import MapButton from "../components/MapButton";
 
 const About = () => {
   return (
-    <div className="flex flex-col items-center text-center mt-10 px-4 lg:px-8">
+    <div className="flex flex-col items-center text-center mt-10 px-4 lg:px-8 bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text">
       <div className="text-4xl sm:text-5xl lg:text-6xl font-semibold">
         <h2>About</h2>
       </div>

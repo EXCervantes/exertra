@@ -40,7 +40,7 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-light-background dark:bg-dark-background text-light-text dark:text-dark-text">
       <h2 className="text-3xl mb-6 font-semibold text-center">
         Welcome {`${user.username}!`}
       </h2>
@@ -54,13 +54,13 @@ const Dashboard = () => {
         {user.workouts.map((workout) => (
           <div
             key={workout._id}
-            className="max-w-sm mx-auto bg-white rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
+            className="max-w-sm mx-auto bg-light-primary dark:bg-dark-primary text-light-text dark:text-dark-text rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
           >
-            <div className="px-6 py-4 border-b border-gray-200">
-              <h3 className="text-xl font-semibold text-gray-800">Workout</h3>
+            <div className="px-6 py-4 border-b border-light-secondary dark:border-dark-secondary">
+              <h3 className="text-xl font-semibold">Workout</h3>
             </div>
 
-            <div className="px-6 py-4 text-gray-700">
+            <div className="px-6 py-4">
               <p className="text-lg font-medium">
                 <span className="font-semibold">Distance:</span>{" "}
                 {workout.distance.toFixed(2)} miles
