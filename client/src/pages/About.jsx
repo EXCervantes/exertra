@@ -18,7 +18,7 @@ const About = () => {
           GitHub repository. Check out my socials and pages below!
         </p>
       </div>
-      <div className="mt-20">
+      <div className="mt-20 pb-10">
         <MapButton />
       </div>
       <div className="fixed left-0 right-0 bottom-10 z-60 mb-0 mt-10 lg:mt-20">

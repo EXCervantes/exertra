@@ -46,8 +46,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+    <div className="flex justify-center items-center min-h-screen bg-light-background dark:bg-dark-background p-4">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
         <h3
           className="text-2xl font-semibold text-center text-gray-800 mb-6"
           id="signup"
@@ -65,7 +65,11 @@ const Signup = () => {
         ) : (
           <form className="space-y-6" onSubmit={handleFormSubmit}>
             <div>
-              <Label htmlFor="username" value="Your Username" />
+              <Label
+                htmlFor="username"
+                value="Your Username"
+                className="text-light-text dark:text-dark-text"
+              />
               <TextInput
                 id="username"
                 type="text"
@@ -81,7 +85,11 @@ const Signup = () => {
             </div>
 
             <div>
-              <Label htmlFor="email" value="Your Email" />
+              <Label
+                htmlFor="email"
+                value="Your Email"
+                className="text-light-text dark:text-dark-text"
+              />
               <TextInput
                 id="email"
                 type="email"
@@ -97,7 +105,11 @@ const Signup = () => {
             </div>
 
             <div>
-              <Label htmlFor="password" value="Your Password" />
+              <Label
+                htmlFor="password"
+                value="Your Password"
+                className="text-light-text dark:text-dark-text"
+              />
               <TextInput
                 id="password"
                 type="password"
@@ -113,7 +125,7 @@ const Signup = () => {
 
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full bg-light-primary dark:bg-dark-primary hover:bg-light-secondary dark:hover:bg-dark-secondary"
             >
               Register New Account
             </Button>
@@ -121,18 +133,18 @@ const Signup = () => {
         )}
 
         {error && (
-          <div className="my-3 p-3 text-red-600 text-center bg-red-100 rounded-lg">
+          <div className="my-3 p-3 text-red-600 bg-red-100 dark:bg-red-900 rounded-lg">
             {error.message}
           </div>
         )}
 
         <div className="mt-6 text-center">
-          <p className="text-gray-700">
+          <p className="text-light-text dark:text-dark-text">
             Already have an account?{" "}
             <Button
               outline
               onClick={handleLoginRedirect}
-              className="ml-2 text-blue-600 hover:text-blue-700"
+              className="ml-2 bg-light-primary dark:bg-dark-primary hover:bg-light-secondary dark:hover:bg-dark-secondary"
             >
               Login
             </Button>

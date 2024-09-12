@@ -1,8 +1,13 @@
 import { Button, Drawer, Sidebar } from "flowbite-react";
-import { useState, useEffect } from "react";
-import { HiInformationCircle, HiLogout, HiSun, HiMoon } from "react-icons/hi";
+import { useState } from "react";
+import { HiInformationCircle, HiLogout } from "react-icons/hi";
 import { FaUser, FaCog, FaGithub } from "react-icons/fa";
-import { BsBoxArrowLeft, BsPatchQuestionFill } from "react-icons/bs";
+import {
+  BsBoxArrowLeft,
+  BsPatchQuestionFill,
+  BsSun,
+  BsMoon,
+} from "react-icons/bs";
 
 import Auth from "../utils/auth";
 
@@ -14,16 +19,18 @@ const RightNav = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const toggleDarkMode = () => setDarkMode(!darkMode);
   const handleClose = () => setIsOpen(false);
 
-  useEffect(() => {
-    if (darkMode) {
+  const toggleTheme = () => {
+    if (!darkMode) {
       document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
-  }, [darkMode]);
+    setDarkMode(!darkMode);
+  };
 
   return (
     <>
@@ -47,13 +54,16 @@ const RightNav = () => {
           <Drawer.Header
             title="MENU"
             titleIcon={() => (
-              <Button onClick={toggleDarkMode} pill className="mr-4">
+              <button
+                className="flex items-center p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+                onClick={toggleTheme}
+              >
                 {darkMode ? (
-                  <HiSun className="h-6 w-6 text-yellow-400" />
+                  <BsSun className="h-5 w-5 text-yellow-500" />
                 ) : (
-                  <HiMoon className="h-6 w-6 text-blue-200" />
+                  <BsMoon className="h-5 w-5 text-gray-500" />
                 )}
-              </Button>
+              </button>
             )}
           />
           <Drawer.Items>
