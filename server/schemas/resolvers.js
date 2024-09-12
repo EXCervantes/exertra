@@ -1,20 +1,9 @@
 const { User, Workout } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 // const stripe = require('stripe')(apitestkey)
-console.log("resolverhasloaded")
-// Define the typeDefs parameters and handle requested relevant data
+
 const resolvers = {
     Query: {
-        // users: async (parent, args, context) => {
-        //     console.log("i am here")
-        //     if (context.user) {
-        //         const userData = await User.findOne({ _id: context.user._id })
-        //             .populate('workouts')
-
-        //         return userData
-        //     }
-        //     throw new AuthenticationError('You need to be logged in!');
-        // },
         me: async (parent, args, context) => {
             if (context.user) {
                 return User.findOne({ _id: context.user._id })

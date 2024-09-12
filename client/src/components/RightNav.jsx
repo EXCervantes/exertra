@@ -39,7 +39,7 @@ const RightNav = () => {
                 <div>
                   <Sidebar.Items>
                     <Sidebar.ItemGroup>
-                      <Sidebar.Item href="/users/list" icon={FaUser}>
+                      <Sidebar.Item href="/dashboard" icon={FaUser}>
                         Dashboard
                       </Sidebar.Item>
                       <Sidebar.Item
