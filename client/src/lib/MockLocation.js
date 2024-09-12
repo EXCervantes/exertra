@@ -43,7 +43,7 @@ const points = [
 let counter = 0;
 let intervalId;
 
-const mock = (successFunc) => {
+const mockWatchPosition = (successFunc) => {
     console.log('mock initialized');
     intervalId = setInterval(() => {
         console.log('sending location', counter)
@@ -54,9 +54,21 @@ const mock = (successFunc) => {
     return true
 }
 
-navigator.geolocation.watchPosition = mock
+const origWatchPosition = navigator.geolocation.watchPosition;
 
-navigator.geolocation.clearWatch = () => {
+const mockClearWatch = () => {
     console.log('clearInterval')
     clearInterval(intervalId)
+}
+
+const origClearWatch = navigator.geolocation.clearWatch;
+
+window.doMock = () => {
+    navigator.geolocation.watchPosition = mockWatchPosition
+    navigator.geolocation.clearWatch = mockClearWatch;
+}
+
+window.unMock = () => {
+    navigator.geolocation.watchPosition = origWatchPosition
+    navigator.geolocation.clearWatch = origClearWatch;
 }
