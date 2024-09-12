@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { formatTime } from "../utils/timehelper";
-import { FaRunning } from "react-icons/fa";
 
 import Auth from "../utils/auth";
 
@@ -13,7 +12,7 @@ const Dashboard = () => {
   const { loading, data } = useQuery(QUERY_ME, {
     skip: !Auth.loggedIn(),
   });
-  // const username = Auth.getProfile().authenticatedPerson?.username;
+
   const user = data?.me || data?.user || {};
 
   useEffect(() => {
@@ -54,7 +53,7 @@ const Dashboard = () => {
             className="p-4 bg-gray-700 text-white rounded-lg shadow-lg"
           >
             <h3 className="text-xl">Workout</h3>
-            <p>Distance: {workout.distance.toFixed} miles</p>
+            <p>Distance: {workout.distance.toFixed(2)} miles</p>
             <p>Duration: {formatTime(workout.time)}</p>
           </div>
         ))}
