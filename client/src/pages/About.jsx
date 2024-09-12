@@ -22,7 +22,7 @@ const About = () => {
         <MapButton />
       </div>
       <div className="fixed left-0 right-0 bottom-10 z-60 mb-0 mt-10 lg:mt-20">
-        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+        <div className="flex flex-wrap text-gray-600 items-center justify-center gap-4 sm:gap-6">
           {socials.map((site, index) => (
             <a
               key={index}
