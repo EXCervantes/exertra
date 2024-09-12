@@ -22,6 +22,7 @@ const Map = () => {
     startDate,
     totalTime,
     totalDistance,
+    pauseTracking,
     isReset,
     resetTracking,
     calculateUserStatistics,
@@ -86,7 +87,7 @@ const Map = () => {
               >
                 <Button
                   gradientMonochrome={"success"}
-                  onClick={startTracking}
+                  onClick={isTracking ? pauseTracking : startTracking}
                   type="button"
                   id="startBtn"
                 >

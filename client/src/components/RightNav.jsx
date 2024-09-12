@@ -2,10 +2,16 @@ import { Button, Drawer, Sidebar, TextInput } from "flowbite-react";
 import { useState } from "react";
 import { HiInformationCircle, HiLogout } from "react-icons/hi";
 import { FaUser, FaCog, FaGithub } from "react-icons/fa";
-import { BsBoxArrowLeft } from "react-icons/bs";
+import { BsBoxArrowLeft, BsPatchQuestionFill } from "react-icons/bs";
 
-// TODO Make Dashboard show past workouts,
+import Auth from "../utils/auth";
+
 const RightNav = () => {
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => setIsOpen(false);
@@ -43,7 +49,14 @@ const RightNav = () => {
                         Dashboard
                       </Sidebar.Item>
                       <Sidebar.Item
-                        href="/authentication/sign-in"
+                        href="https://flowbite-react.com/"
+                        icon={FaCog}
+                      >
+                        Settings
+                      </Sidebar.Item>
+                      <Sidebar.Item
+                        className="cursor-pointer"
+                        onClick={logout}
                         icon={HiLogout}
                       >
                         Logout
@@ -51,15 +64,8 @@ const RightNav = () => {
                     </Sidebar.ItemGroup>
                     <Sidebar.ItemGroup>
                       <Sidebar.Item
-                        href="https://flowbite-react.com/"
-                        icon={FaCog}
-                      >
-                        Settings
-                      </Sidebar.Item>
-
-                      <Sidebar.Item
                         href="https://github.com/EXCervantes/exertra/blob/main/README.md"
-                        icon={HiInformationCircle}
+                        icon={BsPatchQuestionFill}
                       >
                         Help
                       </Sidebar.Item>
@@ -68,6 +74,9 @@ const RightNav = () => {
                         icon={FaGithub}
                       >
                         Dev Github
+                      </Sidebar.Item>
+                      <Sidebar.Item href="/about" icon={HiInformationCircle}>
+                        About
                       </Sidebar.Item>
                     </Sidebar.ItemGroup>
                   </Sidebar.Items>

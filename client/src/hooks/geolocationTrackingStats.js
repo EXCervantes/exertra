@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_WORKOUT } from "../utils/mutations";
+import { isNonNullType } from "graphql";
 
 
 const geolocationTrackingStats = () => {
@@ -12,6 +13,7 @@ const geolocationTrackingStats = () => {
     const [startDate, setStartDate] = useState(null);
     const [totalTime, setTotalTime] = useState(0);
     const [totalDistance, setTotalDistance] = useState(0)
+    const [pausedTime, setPausedTime] = useState(0);
     const [isReset, setIsReset] = useState(false)
 
     const [addWorkout, { error }] = useMutation(ADD_WORKOUT);
@@ -19,6 +21,7 @@ const geolocationTrackingStats = () => {
     const startTracking = () => {
         setIsTracking(true);
         setStartDate(new Date());
+        setPausedTime(0);
         const id = navigator.geolocation.watchPosition(
             (position) => {
                 setWalkingRoute((prevRoute) => [
@@ -42,7 +45,48 @@ const geolocationTrackingStats = () => {
         setWatchId(id);
     };
 
+    const pauseTracking = () => {
+        setIsTracking(false);
+        if (watchId) {
+            navigator.geolocation.clearWatch(watchId)
+            setWatchId(null)
+        }
+        const currentTime = new Date();
+        const pausedTimeDiff = (currentTime - startDate) / 1000;
+        setPausedTime(pausedTime + pausedTimeDiff);
+    };
+
+    const resumeTracking = () => {
+        setIsTracking(true);
+        setStartDate(new Date());
+
+        const id = navigator.geolocation.watchPosition(
+            (position) => {
+                setWalkingRoute((prevRoute) => [
+                    ...prevRoute,
+                    {
+                        coords: position.coords,
+                    },
+                ]);
+                setMapCenter([position.coords.latitude, position.coords.longitude]);
+            },
+            (error) => {
+                setError(error.message);
+                console.error(error);
+            },
+            {
+                enableHighAccuracy: true,
+                maximumAge: 30000,
+                timeout: 2000,
+            }
+        );
+        setWatchId(id);
+    };
+
+
     const calculateUserStatistics = () => {
+        const currentTime = new Date();
+        const totalTime = (currentTime - startDate) / 1000 + pausedTime
         const distance = walkingRoute.reduce((acc, current, index) => {
             if (index === 0) return acc;
             const prevCoords = walkingRoute[index - 1].coords;
@@ -53,8 +97,6 @@ const geolocationTrackingStats = () => {
             )
             return acc + distanceBetweenPoints;
         }, 0);
-
-        const totalTime = (new Date() - startDate) / 1000;
 
         setTotalDistance(distance)
         setTotalTime(totalTime)
@@ -123,6 +165,9 @@ const geolocationTrackingStats = () => {
         totalDistance,
         totalTime,
         calculateUserStatistics,
+        pauseTracking,
+        resumeTracking,
+        resetTracking,
         isReset,
         resetTracking,
     };

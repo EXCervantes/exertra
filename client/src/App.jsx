@@ -11,8 +11,9 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import Home from "./pages/Home.jsx";
-import Error from "./pages/Error.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import About from "./pages/About.jsx";
+import Error from "./pages/Error.jsx";
 
 // Main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -46,6 +47,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/about" element={<About />} />
               <Route
                 path="/"
                 element={
@@ -54,7 +56,7 @@ const App = () => {
                   </ProtectedRoute>
                 }
               />
-              <Route path="*" element={<Error />}></Route>
+              <Route element={<Error />}></Route>
             </Routes>
           </main>
         </BrowserRouter>
