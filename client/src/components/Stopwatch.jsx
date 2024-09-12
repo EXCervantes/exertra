@@ -35,27 +35,27 @@ const Stopwatch = () => {
         >
           <div className="px-6 py-4">
             <div className="text-center" id="stopwatch-stats">
-              <span className="pr-1 text-xl" id="time-text">
+              <span className="block sm:inline pr-1 text-xl" id="time-text">
                 time
               </span>
-              <span className="text-4xl pr-2" id="time-val">
+              <span className="block sm:inline text-4xl pr-2" id="time-val">
                 {formatTime(totalTime)}
               </span>
-              <span className="pr-1 text-xl" id="distance-text">
+              <span className="block sm:inline pr-1 text-xl" id="distance-text">
                 distance
               </span>
-              <span className="text-4xl" id="distance-val">
+              <span className="block sm:inline text-4xl" id="distance-val">
                 {totalDistance.toFixed(2)}
               </span>
-              <span className="pl-1 text-xl" id="distance-mi">
+              <span className="block sm:inline pl-1 text-xl" id="distance-mi">
                 mi
               </span>
             </div>
-            <div className="gap-6 mt-6 flex justify-center">
+            <div className="gap-6 mt-6 flex flex-col sm:flex-row justify-center">
               <Button
                 gradientMonochrome={"success"}
                 className="hover:bg-green-700
-                     text-white font-bold py-2 px-4 mr-2"
+                     text-white font-bold py-2 px-4 sm:mr-2"
                 type="button"
                 onClick={isTracking ? pauseTracking : startTracking}
                 id="startBtn"

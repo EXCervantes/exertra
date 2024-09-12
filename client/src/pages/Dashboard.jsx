@@ -5,6 +5,7 @@ import { QUERY_ME } from "../utils/queries";
 import { formatTime } from "../utils/timehelper";
 
 import Auth from "../utils/auth";
+import MapButton from "../components/MapButton";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -33,28 +34,42 @@ const Dashboard = () => {
           <br />
           Let's go for a jog!
         </h3>
-        <button
-          onClick={() => navigate("/")}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          To The Map!
-        </button>
+        <MapButton />
       </div>
     );
   }
 
   return (
     <div className="p-4">
-      <h2 className="text-3xl mb-4">Welcome {`${user.username}!`}</h2>
-      <div className="space-y-4">
+      <h2 className="text-3xl mb-6 font-semibold text-center">
+        Welcome {`${user.username}!`}
+      </h2>
+      <div className="mb-6">
+        <MapButton />
+      </div>
+      <div className="text-2xl text-center mb-3">
+        <h3>Your Past Workouts</h3>
+      </div>
+      <div className="pt-6 grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {user.workouts.map((workout) => (
           <div
             key={workout._id}
-            className="p-4 bg-gray-700 text-white rounded-lg shadow-lg"
+            className="max-w-sm mx-auto bg-white rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-xl"
           >
-            <h3 className="text-xl">Workout</h3>
-            <p>Distance: {workout.distance.toFixed(2)} miles</p>
-            <p>Duration: {formatTime(workout.time)}</p>
+            <div className="px-6 py-4 border-b border-gray-200">
+              <h3 className="text-xl font-semibold text-gray-800">Workout</h3>
+            </div>
+
+            <div className="px-6 py-4 text-gray-700">
+              <p className="text-lg font-medium">
+                <span className="font-semibold">Distance:</span>{" "}
+                {workout.distance.toFixed(2)} miles
+              </p>
+              <p className="text-lg font-medium">
+                <span className="font-semibold">Duration:</span>{" "}
+                {formatTime(workout.time)}
+              </p>
+            </div>
           </div>
         ))}
       </div>

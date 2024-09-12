@@ -1,6 +1,6 @@
-import { Button, Drawer, Sidebar, TextInput } from "flowbite-react";
-import { useState } from "react";
-import { HiInformationCircle, HiLogout } from "react-icons/hi";
+import { Button, Drawer, Sidebar } from "flowbite-react";
+import { useState, useEffect } from "react";
+import { HiInformationCircle, HiLogout, HiSun, HiMoon } from "react-icons/hi";
 import { FaUser, FaCog, FaGithub } from "react-icons/fa";
 import { BsBoxArrowLeft, BsPatchQuestionFill } from "react-icons/bs";
 
@@ -13,8 +13,17 @@ const RightNav = () => {
   };
 
   const [isOpen, setIsOpen] = useState(false);
-
+  const [darkMode, setDarkMode] = useState(false);
+  const toggleDarkMode = () => setDarkMode(!darkMode);
   const handleClose = () => setIsOpen(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   return (
     <>
@@ -35,7 +44,18 @@ const RightNav = () => {
           onClose={handleClose}
           position="right"
         >
-          <Drawer.Header title="MENU" titleIcon={() => <></>} />
+          <Drawer.Header
+            title="MENU"
+            titleIcon={() => (
+              <Button onClick={toggleDarkMode} pill className="mr-4">
+                {darkMode ? (
+                  <HiSun className="h-6 w-6 text-yellow-400" />
+                ) : (
+                  <HiMoon className="h-6 w-6 text-blue-200" />
+                )}
+              </Button>
+            )}
+          />
           <Drawer.Items>
             <Sidebar
               aria-label="User sidebar for app functions"
@@ -49,7 +69,8 @@ const RightNav = () => {
                         Dashboard
                       </Sidebar.Item>
                       <Sidebar.Item
-                        href="https://flowbite-react.com/"
+                        className="cursor-pointer"
+                        href="/"
                         icon={FaCog}
                       >
                         Settings

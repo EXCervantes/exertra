@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import { Button, Label, TextInput } from "flowbite-react";
@@ -10,6 +10,12 @@ import Auth from "../utils/auth";
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error, data }] = useMutation(LOGIN_USER);
+
+  const navigate = useNavigate();
+
+  const handleSignupRedirect = () => {
+    navigate("/signup");
+  };
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -22,8 +28,7 @@ const Login = (props) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Delete this console log
-    console.log(formState);
+
     try {
       const { data } = await login({
         variables: { ...formState },
@@ -32,7 +37,6 @@ const Login = (props) => {
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
-      // TODO User wrong credits
     }
 
     setFormState({
@@ -42,64 +46,79 @@ const Login = (props) => {
   };
 
   return (
-    <div>
-      <div>
-        <h3 className="text-xl" id="login">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
+      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+        <h3
+          className="text-2xl font-semibold text-center text-gray-800 mb-6"
+          id="login"
+        >
           Login
         </h3>
-        <div>
-          {data ? (
-            <p>
-              Successfully logged in! <Link to="/">back to the main page.</Link>
-            </p>
-          ) : (
-            <form
-              className="flex max-w-md flex-col gap-4"
-              onSubmit={handleFormSubmit}
-            >
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="email" value="Your email" />
-                </div>
-                <TextInput
-                  id="email"
-                  type="email"
-                  name="email"
-                  value={formState.email}
-                  onChange={handleFormChange}
-                  rightIcon={HiMail}
-                  placeholder="email@example.com"
-                  required
-                  shadow
-                />
-              </div>
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="password" value="Your password" />
-                </div>
-                <TextInput
-                  id="password"
-                  type="password"
-                  name="password"
-                  value={formState.password}
-                  onChange={handleFormChange}
-                  rightIcon={HiKey}
-                  required
-                  shadow
-                />
-              </div>
-              {/* <div className="flex items-center gap-2">
-                <Checkbox id="remember" />
-                <Label htmlFor="remember">Remember me</Label>
-              </div> */}
-              <Button type="submit">Submit</Button>
-            </form>
-          )}
-          {error ? (
-            <div className="my-3 p-3 text-black">
-              Email or password incorrect. Please check your login details.
+
+        {data ? (
+          <p className="text-green-600 text-center">
+            Successfully logged in!{" "}
+            <Link to="/" className="text-blue-500 underline">
+              Back to the main page.
+            </Link>
+          </p>
+        ) : (
+          <form className="space-y-6" onSubmit={handleFormSubmit}>
+            <div>
+              <Label htmlFor="email" value="Your email" />
+              <TextInput
+                id="email"
+                type="email"
+                name="email"
+                value={formState.email}
+                onChange={handleFormChange}
+                rightIcon={HiMail}
+                placeholder="email@example.com"
+                required
+                shadow
+                className="mt-1"
+              />
             </div>
-          ) : null}
+            <div>
+              <Label htmlFor="password" value="Your password" />
+              <TextInput
+                id="password"
+                type="password"
+                name="password"
+                value={formState.password}
+                onChange={handleFormChange}
+                rightIcon={HiKey}
+                required
+                shadow
+                className="mt-1"
+              />
+            </div>
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700"
+            >
+              Submit
+            </Button>
+          </form>
+        )}
+
+        {error && (
+          <div className="my-3 p-3 text-red-600 text-center bg-red-100 rounded-lg">
+            Email or password incorrect. Please check your login details.
+          </div>
+        )}
+
+        <div className="mt-6 text-center">
+          <p className="text-gray-700">
+            Don't have an account?{" "}
+            <Button
+              outline
+              onClick={handleSignupRedirect}
+              className="ml-2 text-blue-600 hover:text-blue-700"
+            >
+              Sign Up
+            </Button>
+          </p>
         </div>
       </div>
     </div>
