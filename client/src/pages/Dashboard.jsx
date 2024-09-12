@@ -1,7 +1,7 @@
-// import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
+import { formatTime } from "../utils/timehelper";
 
 import Auth from "../utils/auth";
 
@@ -17,8 +17,6 @@ const Dashboard = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(data.me.workouts);
-
   return (
     <div className="p-4">
       <h2 className="text-3xl mb-4">Welcome {`${username}!`}</h2>
@@ -29,8 +27,8 @@ const Dashboard = () => {
             className="p-4 bg-gray-700 text-white rounded-lg shadow-lg"
           >
             <h3 className="text-xl">Workout</h3>
-            <p>Distance: {workout.distance} miles</p>
-            <p>Duration: {workout.time} minutes</p>
+            <p>Distance: {workout.distance.toFixed(2)} miles</p>
+            <p>Duration: {formatTime(workout.time)}</p>
           </div>
         ))}
       </div>

@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useQuery, useMutation } from "@apollo/client";
-// import { GET_USER } from "../utils/queries";
+import { useMutation } from "@apollo/client";
 import { ADD_WORKOUT } from "../utils/mutations";
-import Auth from "../utils/auth";
 
 
 const geolocationTrackingStats = () => {
@@ -14,9 +12,9 @@ const geolocationTrackingStats = () => {
     const [startDate, setStartDate] = useState(null);
     const [totalTime, setTotalTime] = useState(0);
     const [totalDistance, setTotalDistance] = useState(0)
+    const [isReset, setIsReset] = useState(false)
 
     const [addWorkout, { error }] = useMutation(ADD_WORKOUT);
-    // const { loading, data } = useQuery(GET_USER)
 
     const startTracking = () => {
         setIsTracking(true);
@@ -82,13 +80,7 @@ const geolocationTrackingStats = () => {
     };
 
     const saveWorkout = async () => {
-        // const token = Auth.loggedIn() ? Auth.getToken() : null;
-        // if (!token) {
-        //     return false;
-        // }
-
         try {
-            console.log("i am here")
             const { data } = await addWorkout({
                 variables: {
                     distance: totalDistance,
@@ -104,10 +96,20 @@ const geolocationTrackingStats = () => {
     const stopTracking = () => {
         if (watchId) {
             navigator.geolocation.clearWatch(watchId);
+            setWatchId(null)
             setIsTracking(false);
             calculateUserStatistics()
             saveWorkout()
+            setIsReset(true)
         }
+    };
+
+    const resetTracking = () => {
+        setTotalDistance(0);
+        setTotalTime(0);
+        setWalkingRoute([]);
+        setStartDate(null);
+        setIsReset(false)
     };
 
     return {
@@ -119,7 +121,10 @@ const geolocationTrackingStats = () => {
         stopTracking,
         startDate,
         totalDistance,
-        totalTime
+        totalTime,
+        calculateUserStatistics,
+        isReset,
+        resetTracking,
     };
 };
 

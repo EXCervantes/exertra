@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Polyline } from "react-leaflet";
 import { Button } from "flowbite-react";
 import CustomMarker from "./custom-marker";
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
-dayjs.extend(duration);
+import { formatTime } from "../utils/timehelper";
 import RightNav from "./RightNav";
 import geolocationTrackingStats from "../hooks/geolocationTrackingStats";
 import useMapActions from "../hooks/useMapActions";
@@ -21,8 +19,12 @@ const Map = () => {
     walkingRoute,
     startTracking,
     stopTracking,
+    startDate,
     totalTime,
     totalDistance,
+    isReset,
+    resetTracking,
+    calculateUserStatistics,
   } = geolocationTrackingStats();
 
   useEffect(() => {
@@ -43,6 +45,13 @@ const Map = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (isTracking) {
+      const intervalId = setInterval(calculateUserStatistics, 500);
+      return () => clearInterval(intervalId);
+    }
+  }, [isTracking, walkingRoute, startDate]);
+
   return (
     <div>
       <div style={{ height: "100%" }}>
@@ -60,13 +69,15 @@ const Map = () => {
                 url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                 maxZoom={19}
               />
-              <Polyline
-                positions={walkingRoute.map((pos) => [
-                  pos.coords.latitude,
-                  pos.coords.longitude,
-                ])}
-                pathOptions={{ color: "teal" }}
-              />
+              {walkingRoute.length > 0 && (
+                <Polyline
+                  positions={walkingRoute.map((pos) => [
+                    pos.coords.latitude,
+                    pos.coords.longitude,
+                  ])}
+                  pathOptions={{ color: "teal" }}
+                />
+              )}
               <CustomMarker position={mapCenter} />
               <RightNav />
               <div
@@ -86,21 +97,16 @@ const Map = () => {
                     {/* <Stopwatch /> */}
                     <p>Total Distance: {totalDistance.toFixed(2)} miles</p>
                     <br></br>
-                    <p>
-                      Total Time:{" "}
-                      {dayjs
-                        .duration(totalTime * 1000, "milliseconds")
-                        .format("HH:mm:ss")}
-                    </p>
+                    <p>Total Time: {formatTime(totalTime)}</p>
                   </div>
                 </div>
                 <Button
                   gradientMonochrome={"failure"}
-                  onClick={stopTracking}
+                  onClick={isReset ? resetTracking : stopTracking}
                   type="button"
-                  id="stopBtn"
+                  id={isReset ? "resetBtn" : "stopBtn"}
                 >
-                  Stop
+                  {isReset ? "Reset" : "Stop"}
                 </Button>
               </div>
             </MapContainer>
