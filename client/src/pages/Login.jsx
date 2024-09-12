@@ -46,8 +46,8 @@ const Login = (props) => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-4">
-      <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+    <div className="flex justify-center items-center min-h-screen bg-light-background dark:bg-dark-background p-4">
+      <div className="w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
         <h3
           className="text-2xl font-semibold text-center text-gray-800 mb-6"
           id="login"
@@ -65,7 +65,11 @@ const Login = (props) => {
         ) : (
           <form className="space-y-6" onSubmit={handleFormSubmit}>
             <div>
-              <Label htmlFor="email" value="Your email" />
+              <Label
+                htmlFor="email"
+                value="Your email"
+                className="text-light-text dark:text-dark-text"
+              />
               <TextInput
                 id="email"
                 type="email"
@@ -80,7 +84,11 @@ const Login = (props) => {
               />
             </div>
             <div>
-              <Label htmlFor="password" value="Your password" />
+              <Label
+                htmlFor="password"
+                value="Your password"
+                className="text-light-text dark:text-dark-text"
+              />
               <TextInput
                 id="password"
                 type="password"
@@ -95,7 +103,7 @@ const Login = (props) => {
             </div>
             <Button
               type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700"
+              className="w-full bg-light-primary dark:bg-dark-primary hover:bg-light-secondary dark:hover:bg-dark-secondary"
             >
               Submit
             </Button>
@@ -103,18 +111,18 @@ const Login = (props) => {
         )}
 
         {error && (
-          <div className="my-3 p-3 text-red-600 text-center bg-red-100 rounded-lg">
+          <div className="my-3 p-3 text-red-600 bg-red-100 dark:bg-red-900 rounded-lg">
             Email or password incorrect. Please check your login details.
           </div>
         )}
 
         <div className="mt-6 text-center">
-          <p className="text-gray-700">
+          <p className="text-light-text dark:text-dark-text">
             Don't have an account?{" "}
             <Button
               outline
               onClick={handleSignupRedirect}
-              className="ml-2 text-blue-600 hover:text-blue-700"
+              className="ml-2 bg-light-primary dark:bg-dark-primary hover:bg-light-secondary dark:hover:bg-dark-secondary"
             >
               Sign Up
             </Button>
