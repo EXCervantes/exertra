@@ -16,15 +16,11 @@ const resolvers = {
 
     Mutation: {
         addUser: async (parent, { username, email, password }) => {
-            console.log("addUser")
             const user = await User.create({ username, email, password });
-            console.log("user", user)
             const token = signToken(user);
-            console.log("token", token)
             return { token, user };
         },
         login: async (parent, { email, password }) => {
-            console.log("login")
             const user = await User.findOne({ email });
 
             if (!user) {
@@ -42,13 +38,8 @@ const resolvers = {
             return { token, user };
         },
         addWorkout: async (parent, { distance, time }, context) => {
-            console.log({ distance, time })
-            console.log({ context })
             if (context.user) {
-                console.log("context.user._id", context.user._id)
-                console.log({ distance, time })
                 const workout = new Workout({ distance, time })
-                console.log(workout)
                 try {
                     await User.findByIdAndUpdate(
                         { _id: context.user._id },
@@ -57,7 +48,6 @@ const resolvers = {
                 } catch (error) {
                     console.error(error)
                 }
-                console.log("updatedUser")
                 return workout
             }
             throw AuthenticationError('You need to be logged in!');

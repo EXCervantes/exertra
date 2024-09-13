@@ -27,9 +27,7 @@ const Map = () => {
   const { zoom } = useMapActions();
 
   useEffect(() => {
-    console.log("useEffect triggered");
     if (walkingRoute.length > 0) {
-      console.log("Walking Route Updated: ", walkingRoute);
     }
   }, [walkingRoute]);
 
@@ -64,14 +62,12 @@ const Map = () => {
     setPausedTime(0);
     const id = navigator.geolocation.watchPosition(
       (position) => {
-        console.log("walkposition", position);
         setWalkingRoute((prevRoute) => [
           ...prevRoute,
           {
             coords: position.coords,
           },
         ]);
-        console.log(walkingRoute.length);
         setMapCenter([position.coords.latitude, position.coords.longitude]);
       },
       (error) => {

@@ -19,7 +19,6 @@ type Auth {
 }
 
 type Query {
-  # users: [User]
   me: User
   workouts(_id: ID!): [Workout]
 }
