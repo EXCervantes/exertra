@@ -1,6 +1,5 @@
 const { User, Workout } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
-// const stripe = require('stripe')(apitestkey)
 
 const resolvers = {
     Query: {
