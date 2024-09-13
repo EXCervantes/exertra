@@ -1,4 +1,4 @@
-# Exertra
+# Exertra - The Fitness Keeper
 
 ## Table of Contents
 
